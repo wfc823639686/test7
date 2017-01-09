@@ -8,11 +8,11 @@ import dagger.Provides;
  */
 
 @Module
-public class JobListModule {
+public class JobListPresenterModule {
 
     private final JobListContract.View mView;
 
-    public JobListModule(JobListContract.View view) {
+    public JobListPresenterModule(JobListContract.View view) {
         mView = view;
     }
 

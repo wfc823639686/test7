@@ -7,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /**
  * Created by wangfengchen on 2017/1/5.
  */
@@ -14,6 +17,8 @@ import android.view.ViewGroup;
 public abstract class BaseFragment extends Fragment {
 
     View rootView;
+
+    protected Map<String, String> params = new LinkedHashMap<>();
 
     @Nullable
     @Override
@@ -24,5 +29,9 @@ public abstract class BaseFragment extends Fragment {
         return rootView;
     }
 
-    protected abstract View getRootView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+    protected View getRootView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(getLayoutId(), container, false);
+    }
+
+    protected abstract int getLayoutId();
 }

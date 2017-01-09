@@ -1,4 +1,4 @@
-package com.wfc.test7.mvp.joblist;
+package com.wfc.test7.base;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;

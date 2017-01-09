@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.wfc.test7.apis.JobService;
 import com.wfc.test7.base.BaseActivity;
+import com.wfc.test7.beans.JobInfoResult;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class MainActivity extends BaseActivity {
         Map<String, String> params = new LinkedHashMap<>();
         params.put("id", "3");
         jobService.getJobInfo(params)
-                .subscribe(new Subscriber<String>() {
+                .subscribe(new Subscriber<JobInfoResult>() {
                     @Override
                     public void onCompleted() {
 
@@ -41,7 +42,7 @@ public class MainActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onNext(String s) {
+                    public void onNext(JobInfoResult s) {
                         Log.d(TAG, "onNext " + s);
                     }
                 });

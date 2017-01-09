@@ -1,6 +1,7 @@
 package com.wfc.test7.apis;
 
 
+import com.wfc.test7.beans.JobInfoResult;
 import com.wfc.test7.beans.JobListResult;
 
 import java.util.Map;
@@ -21,7 +22,7 @@ public interface JobService {
         Observable<JobListResult> getJobList(@QueryMap Map<String, String> map);
 
         @GET("api/job/getInfo.htm")
-        Observable<String> getJobInfo(@QueryMap Map<String, String> map);
+        Observable<JobInfoResult> getJobInfo(@QueryMap Map<String, String> map);
 
         @GET("api/enterprise/getComments.htm")
         Observable<String> getComments(@QueryMap Map<String, String> map);

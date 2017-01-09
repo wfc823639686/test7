@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.wfc.test7.R;
 import com.wfc.test7.base.BaseFragment;
+import com.wfc.test7.base.MvpLceFragment;
 import com.wfc.test7.beans.Job;
 import com.wfc.test7.beans.JobListResult;
 import com.zhy.adapter.recyclerview.wrapper.HeaderAndFooterWrapper;
@@ -72,8 +73,8 @@ public class JobListFragment extends BaseFragment implements JobListContract.Vie
     }
 
     @Override
-    protected View getRootView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_job_list, container, false);
+    protected int getLayoutId() {
+        return R.layout.fragment_job_list;
     }
 
     @Override

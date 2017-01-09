@@ -1,7 +1,6 @@
-package com.wfc.test7.mvp.joblist;
+package com.wfc.test7.mvp.jobinfo;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import com.wfc.test7.MyApp;
 import com.wfc.test7.R;
@@ -11,24 +10,25 @@ import com.wfc.test7.components.NetComponent;
 import javax.inject.Inject;
 
 /**
- * Created by wangfengchen on 2017/1/5.
+ * Created by wangfengchen on 2017/1/9.
  */
 
-public class JobListActivity extends BaseActivity {
+public class JobInfoActivity extends BaseActivity {
 
-    @Inject
-    JobListPresenter jobListPresenter;
     NetComponent netComponent;
 
+    @Inject
+    JobInfoPresenter jobInfoPresenter;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        JobListFragment jobListFragment = JobListFragment.newInstance();
+        JobInfoFragment jobInfoFragment = JobInfoFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_content, jobListFragment)
+                .add(R.id.fragment_content, jobInfoFragment)
                 .commit();
-        DaggerJobListComponent.builder()
-                .jobListPresenterModule(new JobListPresenterModule(jobListFragment))
+        DaggerJobInfoComponent.builder()
+                .jobInfoPresenterModule(new JobInfoPresenterModule(jobInfoFragment))
                 .netComponent(netComponent)
                 .build()
                 .inject(this);
@@ -41,8 +41,6 @@ public class JobListActivity extends BaseActivity {
 
     @Override
     protected int layoutId() {
-        return R.layout.activity_job_list;
+        return R.layout.activity_job_info;
     }
-
-
 }

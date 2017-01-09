@@ -43,6 +43,11 @@ public class JobListPresenter implements JobListContract.Presenter {
         mView.setPresenter(this);
     }
 
+    @Inject
+    void setupListeners1() {
+        Log.d(TAG, "setupListeners1");
+    }
+
     @Override
     public void getJobList(final int vt) {
         mView.viewStatus(vt, true);

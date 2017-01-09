@@ -2,6 +2,7 @@ package com.wfc.test7.mvp.joblist;
 
 import com.wfc.test7.base.BasePresenter;
 import com.wfc.test7.base.BaseView;
+import com.wfc.test7.base.MvpLceView;
 import com.wfc.test7.beans.JobListResult;
 
 import java.util.Map;

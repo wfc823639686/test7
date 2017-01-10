@@ -14,8 +14,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import retrofit2.Retrofit;
-import rx.Subscriber;
 
 public class MainActivity extends BaseActivity {
 
@@ -29,24 +27,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstance);
         Map<String, String> params = new LinkedHashMap<>();
         params.put("id", "3");
-        jobService.getJobInfo(params)
-                .subscribe(new Subscriber<JobInfoResult>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(JobInfoResult s) {
-                        Log.d(TAG, "onNext " + s);
-                    }
-                });
-
+        jobService.getJobInfo(params);
     }
 
     @Override

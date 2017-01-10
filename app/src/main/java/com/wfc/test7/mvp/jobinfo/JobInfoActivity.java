@@ -21,7 +21,7 @@ public class JobInfoActivity extends BaseActivity {
     JobInfoPresenter jobInfoPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         JobInfoFragment jobInfoFragment = JobInfoFragment.newInstance();
         getSupportFragmentManager().beginTransaction()

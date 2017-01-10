@@ -19,7 +19,6 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
@@ -91,7 +90,7 @@ public class NetModule {
                 //配置转化库，默认是Gson
                 .addConverterFactory(GsonConverterFactory.create())
                 //配置回调库，采用RxJava
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 //设置OKHttpClient为网络客户端
                 .client(okHttpClient)
                 .build();

@@ -6,12 +6,12 @@ import com.wfc.test7.beans.JobListResult;
 
 import java.util.Map;
 
+import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
-import rx.Observable;
 
 //定义接口
 public interface JobService {
@@ -19,17 +19,17 @@ public interface JobService {
 
 
         @GET("api/job/getJobs.htm")
-        Observable<JobListResult> getJobList(@QueryMap Map<String, String> map);
+        Call<JobListResult> getJobList(@QueryMap Map<String, String> map);
 
         @GET("api/job/getInfo.htm")
-        Observable<JobInfoResult> getJobInfo(@QueryMap Map<String, String> map);
+        Call<JobInfoResult> getJobInfo(@QueryMap Map<String, String> map);
 
         @GET("api/enterprise/getComments.htm")
-        Observable<String> getComments(@QueryMap Map<String, String> map);
+        Call<String> getComments(@QueryMap Map<String, String> map);
 
         @POST("api/job/update.htm")
         @FormUrlEncoded
-        Observable<String> postJob(@FieldMap Map<String, String> map);
+        Call<String> postJob(@FieldMap Map<String, String> map);
 
 
         //POST方法没有缓存，适用于更新数据

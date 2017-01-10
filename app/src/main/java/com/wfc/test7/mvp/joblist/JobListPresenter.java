@@ -7,13 +7,9 @@ import com.wfc.test7.beans.JobListResult;
 
 import javax.inject.Inject;
 
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-
-/**
- * Created by wangfengchen on 2017/1/5.
- */
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class JobListPresenter implements JobListContract.Presenter {
 
@@ -52,23 +48,16 @@ public class JobListPresenter implements JobListContract.Presenter {
     public void getJobList(final int vt) {
         mView.viewStatus(vt, true);
         jobService.getJobList(mView.jobListParams())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<JobListResult>() {
+                .enqueue(new Callback<JobListResult>() {
                     @Override
-                    public void onCompleted() {
+                    public void onResponse(Call<JobListResult> call, Response<JobListResult> response) {
                         mView.viewStatus(vt, false);
+                        mView.setData(vt, response.body());
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onFailure(Call<JobListResult> call, Throwable t) {
                         mView.viewStatus(vt, false);
-                    }
-
-                    @Override
-                    public void onNext(JobListResult s) {
-                        Log.d(TAG, "result " + s);
-                        mView.setData(vt, s);
                     }
                 });
     }

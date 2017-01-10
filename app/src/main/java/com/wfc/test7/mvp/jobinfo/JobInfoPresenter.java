@@ -1,6 +1,9 @@
 package com.wfc.test7.mvp.jobinfo;
 
+import com.trello.rxlifecycle.ActivityEvent;
 import com.wfc.test7.apis.JobService;
+import com.wfc.test7.base.BaseActivity;
+import com.wfc.test7.base.BaseFragment;
 import com.wfc.test7.beans.JobInfoResult;
 
 import javax.inject.Inject;
@@ -16,13 +19,17 @@ import rx.schedulers.Schedulers;
 
 public class JobInfoPresenter implements JobInfoContract.Presenter {
 
-    JobInfoContract.View mView;
+    private JobInfoContract.View mView;
 
-    JobService jobService;
+    private JobService jobService;
+
+    private BaseFragment mTarget;
 
     @Inject
-    public JobInfoPresenter(JobInfoContract.View view, JobService jobService) {
+    public JobInfoPresenter(JobInfoContract.View view,
+                            JobService jobService) {
         mView = view;
+        mTarget = (BaseFragment) mView;
         this.jobService = jobService;
     }
 
@@ -37,6 +44,7 @@ public class JobInfoPresenter implements JobInfoContract.Presenter {
         jobService.getJobInfo(mView.jobInfoParams())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .compose(mTarget.<JobInfoResult>bindUntilEvent(ActivityEvent.DESTROY))
                 .subscribe(new Subscriber<JobInfoResult>() {
                     @Override
                     public void onCompleted() {

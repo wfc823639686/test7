@@ -17,10 +17,13 @@ public interface JobInfoContract {
     interface View extends BaseView<Presenter>, MvpLceView {
         void setData(JobInfoResult data);
         Map<String, String> jobInfoParams();
+        Map<String, String> postJobParams();
     }
 
     interface Presenter extends BasePresenter {
 
         void getJobInfo();
+
+        void postJob();
     }
 }

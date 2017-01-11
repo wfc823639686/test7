@@ -46,18 +46,24 @@ public class JobListPresenter implements JobListContract.Presenter {
 
     @Override
     public void getJobList(final int vt) {
-        mView.viewStatus(vt, true);
-        jobService.getJobList(mView.jobListParams())
+        mView.onRefreshLoading(vt, true);
+        jobService.getJobList(mView.listParams())
                 .enqueue(new Callback<JobListResult>() {
                     @Override
                     public void onResponse(Call<JobListResult> call, Response<JobListResult> response) {
-                        mView.viewStatus(vt, false);
-                        mView.setData(vt, response.body());
+                        mView.onRefreshLoading(vt, false);
+                        JobListResult jobListResult = response.body();
+                        if(jobListResult!=null && jobListResult.status==1) {
+                            mView.setData(vt, jobListResult.results);
+                        } else {
+                            mView.showError(null, null);
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<JobListResult> call, Throwable t) {
-                        mView.viewStatus(vt, false);
+                        mView.onRefreshLoading(vt, false);
+                        mView.showError(t, null);
                     }
                 });
     }

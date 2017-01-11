@@ -2,21 +2,13 @@ package com.wfc.test7.mvp.joblist;
 
 import com.wfc.test7.base.BasePresenter;
 import com.wfc.test7.base.BaseView;
-import com.wfc.test7.base.MvpLceView;
-import com.wfc.test7.beans.JobListResult;
-
-import java.util.Map;
-
-/**
- * Created by wangfengchen on 2017/1/5.
- */
+import com.wfc.test7.base.MvpRefreshLoadingView;
+import com.wfc.test7.beans.Job;
 
 public interface JobListContract {
 
-    interface View extends BaseView<Presenter> {
-        void setData(int vt, JobListResult data);
-        Map<String, String> jobListParams();
-        void viewStatus(int vt, boolean r);
+    interface View extends BaseView<Presenter>, MvpRefreshLoadingView<Job> {
+
     }
 
     interface Presenter extends BasePresenter {

@@ -1,5 +1,7 @@
 package com.wfc.test7.mvp.jobinfo;
 
+import android.util.Log;
+
 import com.wfc.test7.apis.JobService;
 import com.wfc.test7.base.BaseFragment;
 import com.wfc.test7.beans.JobInfoResult;
@@ -11,6 +13,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class JobInfoPresenter implements JobInfoContract.Presenter {
+
+    private static final String TAG = "JobInfoPresenter";
 
     private JobInfoContract.View mView;
 
@@ -41,6 +45,21 @@ public class JobInfoPresenter implements JobInfoContract.Presenter {
             @Override
             public void onFailure(Call<JobInfoResult> call, Throwable t) {
                 mView.showError(t, null);
+            }
+        });
+    }
+
+    @Override
+    public void postJob() {
+        jobService.postJob(mView.postJobParams()).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i(TAG, "result " + response.body());
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Log.e(TAG, "result " + t.getMessage());
             }
         });
     }

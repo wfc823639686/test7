@@ -18,7 +18,7 @@ import java.util.Map;
 
 public abstract class BaseFragment extends Fragment {
 
-    View rootView;
+    protected View rootView;
 
     protected Map<String, String> params = new LinkedHashMap<>();
 

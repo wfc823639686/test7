@@ -6,13 +6,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.wfc.test7.R;
 import com.wfc.test7.base.BaseFragment;
 import com.wfc.test7.base.MvpLceFragment;
 import com.wfc.test7.beans.JobInfoResult;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by wangfengchen on 2017/1/9.
@@ -21,7 +26,10 @@ import java.util.Map;
 public class JobInfoFragment extends MvpLceFragment implements JobInfoContract.View {
 
     private static final String TAG = "JobInfoFragment";
+
     JobInfoContract.Presenter mPresenter;
+
+    private Map<String, String> postJobParams = new LinkedHashMap<>();
 
     public static JobInfoFragment newInstance() {
         return new JobInfoFragment();
@@ -31,6 +39,7 @@ public class JobInfoFragment extends MvpLceFragment implements JobInfoContract.V
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mPresenter.getJobInfo();
+        mPresenter.postJob();
     }
 
     @Override
@@ -48,6 +57,13 @@ public class JobInfoFragment extends MvpLceFragment implements JobInfoContract.V
         params.put("id", "3");
         params.put("enterpriseId", "4");
         return params;
+    }
+
+    @Override
+    public Map<String, String> postJobParams() {
+        postJobParams.put("id", "3");
+        postJobParams.put("jobName", null);
+        return postJobParams;
     }
 
     @Override

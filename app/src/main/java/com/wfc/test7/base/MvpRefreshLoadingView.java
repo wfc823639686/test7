@@ -13,5 +13,7 @@ public interface MvpRefreshLoadingView<M> {
 
     Map<String, String> listParams();
 
+    int last();
+
     void showError(Throwable e, Bundle bundle);
 }

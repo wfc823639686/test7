@@ -47,6 +47,9 @@ public class JobListPresenter implements JobListContract.Presenter {
     @Override
     public void getJobList(final int vt) {
         mView.onRefreshLoading(vt, true);
+        if(vt==1) {
+            mView.listParams().put("last", String.valueOf(mView.last()));
+        }
         jobService.getJobList(mView.listParams())
                 .enqueue(new Callback<JobListResult>() {
                     @Override
